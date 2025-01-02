@@ -92,7 +92,43 @@ By the end of this module, you will deepen your practice with:
    - **GitHub Repository Link**: Must have your own code.  
      - **README**: Briefly explain how to run the new tests and link to your Docker Hub repository.  
    - This module focuses solely on modeling and validation; you’ll create actual endpoints (BREAD routes) in **Module 12**.
+# **Grading Expectations**
 
+Your submissions for the **Hands-On Assignment** will be evaluated based on the following two criteria:
+
+### **1. Submission Completeness (50 Points)**
+
+- **GitHub Repository Link:**
+  - Provided and accessible.
+  - Contains all necessary files (`SQLAlchemy` models, Pydantic schemas, application code, tests, GitHub Actions workflow).
+
+- **Screenshots:**
+  - **GitHub Actions Workflow:** Screenshot showing a successful run of the GitHub Actions workflow.
+  - **Docker Hub Deployment:** Screenshot demonstrating the Docker image has been successfully pushed to Docker Hub.
+
+- **Documentation:**
+  - Includes a reflection document addressing key experiences and challenges faced during the development and deployment process.
+  - README file contains instructions on how to run tests locally and links to the Docker Hub repository.
+
+### **2. Functionality of Calculation Model and CI/CD Pipeline (50 Points)**
+
+- **Calculation Model:**
+  - SQLAlchemy `Calculation` model correctly implemented with fields for `a`, `b`, `type`, and optionally `result`.
+  - Proper use of foreign keys if `user_id` is referenced.
+  - Implementation of the factory pattern (if attempted) to handle different calculation types.
+
+- **Pydantic Schemas:**
+  - **CalculationCreate** schema accurately validates incoming data.
+  - **CalculationRead** schema correctly serializes output data, excluding sensitive information.
+  
+- **Testing and CI/CD:**
+  - Comprehensive unit and integration tests are written and pass successfully in the GitHub Actions workflow.
+  - CI/CD pipeline is properly configured to build, scan, and deploy the Docker image to Docker Hub without errors.
+  - Docker image is functional and can be pulled from Docker Hub, running the application as expected.
+
+---
+
+**Total: 100 Points**
 ---
 
 ## **Reflect**
