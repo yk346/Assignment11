@@ -1,3 +1,37 @@
+To run tests:
+1. Add a Test Service in docker-compose.yml
+
+  # Service: tests
+  tests:
+    build: .
+    container_name: fastapi_tests
+    command: pytest --maxfail=1 --disable-warnings --tb=short
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/fastapi_db
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    volumes:
+      - .:/app
+
+2. Run the Database & App in the Background:
+docker-compose up --build -d
+
+3. Run Tests Inside Docker:
+docker-compose run --rm test
+
+4. (Optional) If Tests Fail Due to Database State:
+docker-compose down -v
+docker-compose up --build -d
+docker-compose run --rm test
+
+That’s it!
+Docker will spin up Postgres, your app, and run the tests in a clean environment.
+
+The DATABASE_URL in tests must point to db, not localhost.
+
 
 # 📦 Project Setup
 
