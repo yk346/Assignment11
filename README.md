@@ -1,3 +1,6 @@
+Docker hub repository link:
+https://hub.docker.com/repository/docker/yk346/601_module11/general
+
 To run tests:
 1. Add a Test Service in docker-compose.yml
 
@@ -20,12 +23,12 @@ To run tests:
 docker-compose up --build -d
 
 3. Run Tests Inside Docker:
-docker-compose run --rm test
+docker-compose run --rm tests
 
 4. (Optional) If Tests Fail Due to Database State:
 docker-compose down -v
 docker-compose up --build -d
-docker-compose run --rm test
+docker-compose run --rm tests
 
 That’s it!
 Docker will spin up Postgres, your app, and run the tests in a clean environment.
