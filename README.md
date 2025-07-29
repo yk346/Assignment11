@@ -1,42 +1,23 @@
 Docker hub repository link:
 https://hub.docker.com/repository/docker/yk346/601_module11/general
 
-To run tests:
-1. Add a Test Service in docker-compose.yml
-
-  # Service: tests
-  tests:
-    build: .
-    container_name: fastapi_tests
-    command: pytest --cov=app --cov-report=term-missing
-    volumes:
-      - .:/app
-      - coverage_data:/app/.coverage  # <-- Anonymous volume override
-    environment:
-      PYTHONDONTWRITEBYTECODE: 1
-      PYTHONUNBUFFERED: 1
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/fastapi_db
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - app-network
-
-2. Run the Database & App in the Background:
-docker-compose up --build -d
-
-3. Run Tests Inside Docker:
-docker-compose run --rm tests
-
-4. (Optional) If Tests Fail Due to Database State:
-docker-compose down -v
-docker-compose up --build -d
-docker-compose run --rm tests
-
-That’s it!
-Docker will spin up Postgres, your app, and run the tests in a clean environment.
-
-The DATABASE_URL in tests must point to db, not localhost.
+Running Tests Locally:
+1. Activate Virtual Environment 
+source venv/bin/activate 
+2. Run All Tests (unit + integration + e2e)
+pytest
+3. Run Unit Tests Only
+pytest tests/unit
+4. Run Integration Tests Only
+pytest tests/integration
+5. Run End-to-End (E2E) Tests Only
+pytest tests/e2e
+6. Run a Specific Test File
+pytest tests/integration/test_user_auth.py
+7. Run Tests with Coverage Report
+pytest --cov=app --cov-report=term-missing
+8. (Playwright E2E Tests) Install Browsers (Only once)
+playwright install
 
 
 # 📦 Project Setup
