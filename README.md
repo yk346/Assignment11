@@ -8,16 +8,19 @@ To run tests:
   tests:
     build: .
     container_name: fastapi_tests
-    command: pytest --maxfail=1 --disable-warnings --tb=short
+    command: pytest --cov=app --cov-report=term-missing
+    volumes:
+      - .:/app
+      - coverage_data:/app/.coverage  # <-- Anonymous volume override
     environment:
+      PYTHONDONTWRITEBYTECODE: 1
+      PYTHONUNBUFFERED: 1
       DATABASE_URL: postgresql://postgres:postgres@db:5432/fastapi_db
     depends_on:
       db:
         condition: service_healthy
     networks:
       - app-network
-    volumes:
-      - .:/app
 
 2. Run the Database & App in the Background:
 docker-compose up --build -d
