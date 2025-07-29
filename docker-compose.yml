@@ -57,6 +57,21 @@ services:
     networks:
       - app-network
 
+  # Service: tests
+  tests:
+    build: .
+    container_name: fastapi_tests
+    command: pytest --maxfail=1 --disable-warnings --tb=short
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/fastapi_db
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    volumes:
+      - .:/app
+
 volumes:
   postgres_data:
     driver: local
